@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwrtncgghdtqu"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_lvhjm"]
+[ext_resource type="Script" path="res://Label.gd" id="2_pxeij"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub277"]
+
+[node name="Cafe_Scene" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="PlaceholderTile" type="ColorRect" parent="."]
+offset_left = -1.0
+offset_right = 639.0
+offset_bottom = 360.0
+color = Color(0.641934, 0.641934, 0.641934, 1)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_lvhjm")
+speed = 500
+acceleration = 1200
+shadow_offset = Vector2(0, 20)
+
+[node name="Shadow" type="ColorRect" parent="Player"]
+offset_left = -9.0
+offset_right = 23.0
+offset_bottom = 40.0
+color = Color(0.517184, 0.517184, 0.517184, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_ub277")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 360
+
+[node name="Label" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 120.0
+offset_bottom = 80.0
+script = ExtResource("2_pxeij")
+player_path = NodePath("../Player")
