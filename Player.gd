@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed = 300
 @export var sprint_multiplier = 1.5
 @export var acceleration = 1000
-@export var friction = 1000
+@export var friction = 1500
 @export var shadow_offset = Vector2(5, 15)
 
 var horizontal_velocity = 0.0 
@@ -36,7 +36,6 @@ func _process(delta):
 		horizontal_velocity = move_toward(horizontal_velocity, input_vector.x * current_speed, acceleration * delta)
 	else:
 		horizontal_velocity = move_toward(horizontal_velocity, 0, friction * delta)
-		
 	if input_vector.y != 0:
 		vertical_velocity = input_vector.y * current_speed
 	else:
@@ -54,7 +53,11 @@ func _process(delta):
 		global_position.x = 640
 	elif global_position.x > 640:
 		global_position.x = 0
-	
+	if global_position.y < -30:
+		global_position.y = 360
+	elif  global_position.y > 360:
+		global_position.y = 0
+			
 func update_shadow_position():
 	var shadow = $Shadow
 	shadow.global_position = global_position + (shadow_offset)
