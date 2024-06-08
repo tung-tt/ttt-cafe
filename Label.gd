@@ -13,4 +13,5 @@ func _ready():
 func _process(delta):
 	if player:
 		var player_position = player.global_position
-		text = "Player Position: " + str(player_position)
+		var player_speed = player.velocity.length()
+		text = "Player Position: " + str(player_position) + "\nPlayer Speed: " + str(player_speed)

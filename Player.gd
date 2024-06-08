@@ -1,8 +1,9 @@
 extends CharacterBody2D
 # Variables
 @export var speed = 300
+@export var sprint_multiplier = 1.5
 @export var acceleration = 1000
-@export var friction = 900
+@export var friction = 1000
 @export var shadow_offset = Vector2(5, 15)
 
 var horizontal_velocity = 0.0 
@@ -26,15 +27,18 @@ func _process(delta):
 	# Ensure Consistent/Stable speed
 	if input_vector != Vector2.ZERO:
 		input_vector = input_vector.normalized()
+	var current_speed = speed
+	if Input.is_action_pressed("sprint"):
+		current_speed *= sprint_multiplier
 		
 	# Apply velocity separately for horizontal & vertical
 	if input_vector.x != 0:
-		horizontal_velocity = move_toward(horizontal_velocity, input_vector.x * speed, acceleration * delta)
+		horizontal_velocity = move_toward(horizontal_velocity, input_vector.x * current_speed, acceleration * delta)
 	else:
 		horizontal_velocity = move_toward(horizontal_velocity, 0, friction * delta)
 		
 	if input_vector.y != 0:
-		vertical_velocity = input_vector.y * speed
+		vertical_velocity = input_vector.y * current_speed
 	else:
 		vertical_velocity = 0
 	# Combine Horizontal and Vertical velocities

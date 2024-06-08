@@ -18,14 +18,15 @@ color = Color(0.641934, 0.641934, 0.641934, 1)
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_lvhjm")
-speed = 500
+sprint_multiplier = 3.0
 acceleration = 1200
+friction = 5000
 shadow_offset = Vector2(0, 20)
 
 [node name="Shadow" type="ColorRect" parent="Player"]
 offset_left = -9.0
 offset_right = 23.0
-offset_bottom = 40.0
+offset_bottom = 30.0
 color = Color(0.517184, 0.517184, 0.517184, 1)
 
 [node name="ColorRect" type="ColorRect" parent="Player"]
