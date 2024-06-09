@@ -1,13 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwrtncgghdtqu"]
+[gd_scene load_steps=7 format=3 uid="uid://bwrtncgghdtqu"]
 
-[ext_resource type="Shader" path="res://Outline.gdshader" id="1_5ihu7"]
 [ext_resource type="Script" path="res://Player.gd" id="1_lvhjm"]
 [ext_resource type="Script" path="res://Label.gd" id="2_pxeij"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jqr8x"]
-shader = ExtResource("1_5ihu7")
-shader_parameter/outline_color = Vector4(0, 0, 0, 1)
-shader_parameter/outline_size = 1.0
 
 [sub_resource type="Shader" id="Shader_ayb4s"]
 code = "shader_type canvas_item;
@@ -51,7 +45,6 @@ offset_bottom = 360.0
 color = Color(0.641934, 0.641934, 0.641934, 1)
 
 [node name="Player" type="CharacterBody2D" parent="."]
-material = SubResource("ShaderMaterial_jqr8x")
 position = Vector2(320, 180)
 script = ExtResource("1_lvhjm")
 sprint_multiplier = 3.0
