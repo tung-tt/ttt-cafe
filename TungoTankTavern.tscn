@@ -3,6 +3,9 @@
 [ext_resource type="Script" path="res://Player.gd" id="1_lvhjm"]
 [ext_resource type="Script" path="res://Label.gd" id="2_pxeij"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v4js"]
+size = Vector2(32, 8)
+
 [sub_resource type="Shader" id="Shader_ayb4s"]
 code = "shader_type canvas_item;
 
@@ -30,9 +33,6 @@ shader = SubResource("Shader_ayb4s")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub277"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v4js"]
-size = Vector2(32, 8)
-
 [node name="Cafe_Scene" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -43,6 +43,25 @@ offset_left = -1.0
 offset_right = 639.0
 offset_bottom = 360.0
 color = Color(0.641934, 0.641934, 0.641934, 1)
+
+[node name="Table" type="StaticBody2D" parent="."]
+position = Vector2(165, 194)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
+position = Vector2(16, 12)
+shape = SubResource("RectangleShape2D_7v4js")
+
+[node name="ColorRect2" type="ColorRect" parent="Table"]
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 20.0
+color = Color(0.517184, 0.517184, 0.517184, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Table"]
+offset_right = 32.0
+offset_bottom = 16.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(320, 180)
@@ -80,22 +99,3 @@ offset_right = 120.0
 offset_bottom = 80.0
 script = ExtResource("2_pxeij")
 player_path = NodePath("../Player")
-
-[node name="Table" type="StaticBody2D" parent="."]
-position = Vector2(165, 194)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
-position = Vector2(16, 12)
-shape = SubResource("RectangleShape2D_7v4js")
-
-[node name="ColorRect2" type="ColorRect" parent="Table"]
-offset_top = 4.0
-offset_right = 32.0
-offset_bottom = 20.0
-color = Color(0.517184, 0.517184, 0.517184, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="Table"]
-offset_right = 32.0
-offset_bottom = 16.0
-metadata/_edit_use_anchors_ = true
