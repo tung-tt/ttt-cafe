@@ -1,9 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwrtncgghdtqu"]
+[gd_scene load_steps=7 format=3 uid="uid://bwrtncgghdtqu"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_lvhjm"]
 [ext_resource type="Script" path="res://Label.gd" id="2_pxeij"]
 
+[sub_resource type="Shader" id="Shader_ayb4s"]
+code = "shader_type canvas_item;
+
+uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float outline_size = 1.0;
+
+void fragment() {
+    vec4 texcolor = texture(TEXTURE, FRAGCOORD.xy / TEXTURE_PIXEL_SIZE);
+    if (texcolor.a < 0.1) {
+        for (float x = -outline_size; x <= outline_size; x++) {
+            for (float y = -outline_size; y <= outline_size; y++) {
+                vec4 sample = texture(TEXTURE, (FRAGCOORD.xy + vec2(x, y)) / TEXTURE_PIXEL_SIZE);
+                if (sample.a > 0.1) {
+                    texcolor = outline_color;
+                }
+            }
+        }
+    }
+    COLOR = texcolor;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dccqm"]
+shader = SubResource("Shader_ayb4s")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub277"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v4js"]
+size = Vector2(32, 8)
 
 [node name="Cafe_Scene" type="Node2D"]
 
@@ -17,6 +45,7 @@ offset_bottom = 360.0
 color = Color(0.641934, 0.641934, 0.641934, 1)
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(320, 180)
 script = ExtResource("1_lvhjm")
 sprint_multiplier = 3.0
 acceleration = 1200
@@ -30,6 +59,7 @@ offset_bottom = 30.0
 color = Color(0.517184, 0.517184, 0.517184, 1)
 
 [node name="ColorRect" type="ColorRect" parent="Player"]
+material = SubResource("ShaderMaterial_dccqm")
 offset_right = 32.0
 offset_bottom = 32.0
 
@@ -50,3 +80,22 @@ offset_right = 120.0
 offset_bottom = 80.0
 script = ExtResource("2_pxeij")
 player_path = NodePath("../Player")
+
+[node name="Table" type="StaticBody2D" parent="."]
+position = Vector2(165, 194)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
+position = Vector2(16, 12)
+shape = SubResource("RectangleShape2D_7v4js")
+
+[node name="ColorRect2" type="ColorRect" parent="Table"]
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 20.0
+color = Color(0.517184, 0.517184, 0.517184, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Table"]
+offset_right = 32.0
+offset_bottom = 16.0
+metadata/_edit_use_anchors_ = true
