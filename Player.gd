@@ -30,7 +30,7 @@ func _process(delta):
 	var current_speed = speed
 	if Input.is_action_pressed("sprint"):
 		current_speed *= sprint_multiplier
-		
+
 	# Apply velocity separately for horizontal & vertical
 	if input_vector.x != 0:
 		horizontal_velocity = move_toward(horizontal_velocity, input_vector.x * current_speed, acceleration * delta)
